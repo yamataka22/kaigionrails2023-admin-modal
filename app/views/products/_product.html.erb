@@ -1,47 +1,63 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-white py-3">
+    <h3 class="card-title mb-0">商品詳細 #<%= product.id %></h3>
+  </div>
+  <div class="list-group list-group-flush" id="<%= dom_id product %>">
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Name:</strong></div>
+        <div class="col-lg-10"><%= product.name %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Stock:</strong></div>
+        <div class="col-lg-10"><%= product.stock %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Price:</strong></div>
+        <div class="col-lg-10"><%= product.price %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Status:</strong></div>
+        <div class="col-lg-10"><%= product.status %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Description:</strong></div>
+        <div class="col-lg-10"><%= simple_format(h(product.description)) %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Category:</strong></div>
+        <div class="col-lg-10"><%= product.category %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Start date:</strong></div>
+        <div class="col-lg-10"><%= product.sale_start_date %></div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Memo:</strong></div>
+        <div class="col-lg-10"><%= simple_format(h(product.memo)) %></div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between p-3">
+      <div>
+        <%= link_to "編集", edit_product_path(@product), class: 'btn btn-info me-2', data: { turbo_frame: '_top' } %>
+        <%= link_to "一覧へ戻る", products_path, class: 'btn btn-outline-secondary' %>
+      </div>
 
-  <p>
-    <strong>Category:</strong>
-    <%= product.category %>
-  </p>
-
-  <p>
-    <strong>Stock:</strong>
-    <%= product.stock %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= product.status %>
-  </p>
-
-  <p>
-    <strong>Sale start date:</strong>
-    <%= product.sale_start_date %>
-  </p>
-
-  <p>
-    <strong>Sale end date:</strong>
-    <%= product.sale_end_date %>
-  </p>
-
-  <p>
-    <strong>Memo:</strong>
-    <%= product.memo %>
-  </p>
-
+      <%= link_to "削除", @product, class: 'btn btn-warning', data: { turbo_method: :delete, turbo_confirm: '削除してよろしいでしょうか？' } %>
+    </div>
+  </div>
 </div>

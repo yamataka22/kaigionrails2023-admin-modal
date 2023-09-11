@@ -1,14 +1,76 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Products</h1>
+  <div class="mb-3 d-flex align-items-center justify-content-between">
+    <h1>商品管理</h1>
+    <div>
+      <%= link_to "新規作成", new_product_path, class: 'btn btn-success' %>
+    </div>
+  </div>
 
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+  <div class="row">
+    <div class="col-3">
+      <%= form_with url: products_path, method: :get, scope: :search, data: { turbo_frame: :products, turbo_action: :advance } do |form| %>
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <div class="mb-3">
+              <%= form.label :name_like, 'Name', class: 'form-label' %>
+              <%= form.text_field :name_like, class: 'form-control', placeholder: 'Like' %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :price_gteq, 'Price', class: 'form-label' %>
+              <%= form.text_field :price_gteq, class: 'form-control', placeholder: '以上' %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :stock_lteq, 'Stock', class: 'form-label' %>
+              <%= form.text_field :stock_lteq, class: 'form-control', placeholder: '以下' %>
+            </div>
+            <div class="mb-3">
+              <div class="mb-2">Statuses</div>
+              <% Product.statuses.each do |name, key| %>
+                <label class="form-check">
+                  <%= form.check_box(:statuses_any, { multiple: true, class: 'form-check-input' }, key, nil) %>
+                  <span class="form-check-label"><%= name %></span>
+                </label>
+              <% end %>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="row g-2">
+              <div class="col-6">
+                <%= form.submit '検索', class: 'btn btn-primary w-100' %>
+              </div>
+              <div class="col-6">
+                <%= link_to 'クリア', products_path, class: 'btn btn-outline-secondary w-100', data: { turbo: false } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-9" style="height: 85vh; overflow-y: scroll">
+      <%= turbo_frame_tag :products do %>
+        <table class="table table-hover shadow-sm">
+          <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= render partial: 'product_row', collection: @products, as: :product %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New product", new_product_path %>
+
+
+

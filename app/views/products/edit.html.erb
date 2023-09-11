@@ -1,10 +1,14 @@
-<h1>Editing product</h1>
-
-<%= render "form", product: @product %>
-
-<br>
-
-<div>
-  <%= link_to "Show this product", @product %> |
-  <%= link_to "Back to products", products_path %>
+<div class="container pt-4">
+  <div style="color: green"><%= notice %></div>
+  <div style="color: #dc3545"><%= alert %></div>
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-white py-3">
+      <h3 class="card-title mb-0">商品編集 #<%= @product.id %></h3>
+    </div>
+    <div class="card-body">
+      <%= turbo_frame_tag @product do %>
+        <%= render 'form', product: @product %>
+      <% end %>
+    </div>
+  </div>
 </div>
