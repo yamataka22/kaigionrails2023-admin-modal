@@ -1,0 +1,8 @@
+<% if @product.errors.blank? %>
+  <%= turbo_stream.update 'remote_modal' do %>
+    <%= render "remote_modal", title: "商品詳細 ##{@product.id}" do %>
+      <%= render @product %>
+    <% end %>
+  <% end %>
+  <%= turbo_stream.replace @product, partial: 'product_row', locals: { product: @product } %>
+<% end %>

@@ -1,6 +1,6 @@
 <tr id="<%= dom_id(product) %>">
   <td>
-    <%= link_to "Show", product_path(product), data: { turbo_frame: '_top' } %>
+    <%= link_to "Show", product_path(product), data: { turbo_frame: 'remote_modal' } %>
   </td>
   <td><%= product.id %></td>
   <td><%= product.name %></td>
@@ -9,6 +9,6 @@
   <td><%= product.stock %></td>
   <td><%= product.status %></td>
   <td>
-    <%= link_to "Edit", edit_product_path(product), data: { turbo_frame: '_top' } %>
+    <%= link_to "Edit", edit_product_path(product), data: { turbo_frame: 'remote_modal' } %>
   </td>
 </tr>

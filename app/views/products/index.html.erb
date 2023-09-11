@@ -4,7 +4,7 @@
   <div class="mb-3 d-flex align-items-center justify-content-between">
     <h1>商品管理</h1>
     <div>
-      <%= link_to "新規作成", new_product_path, class: 'btn btn-success' %>
+      <%= link_to "新規作成", new_product_path, class: 'btn btn-success', data: { turbo_frame: 'remote_modal' } %>
     </div>
   </div>
 
@@ -62,8 +62,8 @@
             <th></th>
           </tr>
           </thead>
-          <tbody>
-          <%= render partial: 'product_row', collection: @products, as: :product %>
+          <tbody id="product_rows">
+            <%= render partial: 'product_row', collection: @products, as: :product %>
           </tbody>
         </table>
       <% end %>

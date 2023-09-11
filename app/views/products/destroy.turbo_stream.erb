@@ -1,0 +1,4 @@
+<% if @product.errors.blank? %>
+  <%= turbo_stream.update 'remote_modal' %>
+  <%= turbo_stream.remove @product %>
+<% end %>

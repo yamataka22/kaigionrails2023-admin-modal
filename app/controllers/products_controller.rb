@@ -27,7 +27,14 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      redirect_to product_url(@product), notice: "Product was successfully created."
+      _flash = "Product was successfully created."
+      respond_to do |format|
+        format.html { redirect_to product_path(@product), notice: _flash }
+        format.turbo_stream do
+          flash.now[:notice] = _flash
+          @turbo_path = product_path(@product)
+        end
+      end
     else
       flash.now[:alert] = "Product was unsuccessfully created."
       render :new, status: :unprocessable_entity
@@ -37,7 +44,14 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
   def update
     if @product.update(product_params)
-      redirect_to product_url(@product), notice: "Product was successfully updated."
+      _flash = "Product was successfully updated."
+      respond_to do |format|
+        format.html { redirect_to product_path(@product), notice: _flash }
+        format.turbo_stream do
+          flash.now[:notice] = _flash
+          @turbo_path = product_path(@product)
+        end
+      end
     else
       flash.now[:alert] = "Product was unsuccessfully updated."
       render :edit, status: :unprocessable_entity
@@ -47,7 +61,6 @@ class ProductsController < ApplicationController
   # DELETE /products/1 or /products/1.json
   def destroy
     @product.destroy
-    redirect_to products_url, notice: "Product was successfully destroyed."
   end
 
   private

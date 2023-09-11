@@ -1,4 +1,3 @@
-<div class="container pt-4">
-  <p style="color: green"><%= notice %></p>
+<%= render "remote_modal", title: "商品詳細 ##{@product.id}" do %>
   <%= render @product %>
-</div>
+<% end %>

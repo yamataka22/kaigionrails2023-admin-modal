@@ -1,84 +1,90 @@
-<%= form_with(model: product, data: { turbo_frame: '_top' }) do |form| %>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :name, class: 'form-label col-form-label' %>
+<%= turbo_frame_tag(product, :form) do %>
+  <%= form_with(model: product, html: { data: { turbo: turbo_frame_request? } }) do |form| %>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :name, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-10">
+        <%= form.text_field :name, class: "form-control" %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:name).first %></div>
+      </div>
     </div>
-    <div class="col-lg-10">
-      <%= form.text_field :name, class: "form-control" %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:name).first %></div>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :stock, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-2">
+        <%= form.number_field :stock, class: "form-control" %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:stock).first %></div>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :stock, class: 'form-label col-form-label' %>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :price, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-2">
+        <%= form.number_field :price, class: "form-control" %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:price).first %></div>
+      </div>
     </div>
-    <div class="col-lg-2">
-      <%= form.number_field :stock, class: "form-control" %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:stock).first %></div>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :status, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-10">
+        <% Product.statuses.each do |value, key| %>
+          <label class="form-check form-check-inline">
+            <%= form.radio_button :status, value, class: "form-check-input", checked: value == form.object.status.to_s %>
+            <span class="form-check-label"><%= value %></span>
+          </label>
+        <% end %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:status).first %></div>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :price, class: 'form-label col-form-label' %>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :description, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-10">
+        <%= form.text_area :description, class: "form-control", rows: 3 %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:description).first %></div>
+      </div>
     </div>
-    <div class="col-lg-2">
-      <%= form.number_field :price, class: "form-control" %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:price).first %></div>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :category, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-10">
+        <%= form.text_field :category, class: "form-control" %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:category).first %></div>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :status, class: 'form-label col-form-label' %>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :sale_start_date, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-2">
+        <%= form.date_field :sale_start_date, class: "form-control" %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:sale_start_date).first %></div>
+      </div>
     </div>
-    <div class="col-lg-10">
-      <% Product.statuses.each do |value, key| %>
-        <label class="form-check form-check-inline">
-          <%= form.radio_button :status, value, class: "form-check-input", checked: value == form.object.status.to_s %>
-          <span class="form-check-label"><%= value %></span>
-        </label>
+    <div class="row mb-3">
+      <div class="col-lg-2">
+        <%= form.label :memo, class: 'form-label col-form-label' %>
+      </div>
+      <div class="col-lg-10">
+        <%= form.text_area :memo, class: "form-control", rows: 3 %>
+        <div class="text-danger"><%= product.errors.full_messages_for(:memo).first %></div>
+      </div>
+    </div>
+    <hr class="my-4 border-secondary">
+    <div class="text-center">
+      <%= form.submit "更新", class: 'btn btn-primary me-2' %>
+      <% if turbo_frame_request? %>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">閉じる</button>
+      <% else %>
+        <%= link_to "一覧へ戻る", products_path, class: 'btn btn-outline-secondary', data: { turbo_frame: '_top' } %>
       <% end %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:status).first %></div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :description, class: 'form-label col-form-label' %>
-    </div>
-    <div class="col-lg-10">
-      <%= form.text_area :description, class: "form-control", rows: 3 %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:description).first %></div>
-    </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :category, class: 'form-label col-form-label' %>
-    </div>
-    <div class="col-lg-10">
-      <%= form.text_field :category, class: "form-control" %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:category).first %></div>
-    </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :sale_start_date, class: 'form-label col-form-label' %>
-    </div>
-    <div class="col-lg-2">
-      <%= form.date_field :sale_start_date, class: "form-control" %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:sale_start_date).first %></div>
-    </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-lg-2">
-      <%= form.label :memo, class: 'form-label col-form-label' %>
-    </div>
-    <div class="col-lg-10">
-      <%= form.text_area :memo, class: "form-control", rows: 3 %>
-      <div class="text-danger"><%= product.errors.full_messages_for(:memo).first %></div>
-    </div>
-  </div>
-  <hr class="my-4 border-secondary">
-  <div class="text-center">
-    <%= form.submit "更新", class: 'btn btn-primary me-2' %>
-    <%= link_to "一覧へ戻る", products_path, class: 'btn btn-outline-secondary', data: { turbo_frame: '_top' } %>
-  </div>
+  <% end %>
 <% end %>
