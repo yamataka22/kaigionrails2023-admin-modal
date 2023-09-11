@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  category: MyString
+  stock: 1
+  price: 1
+  description: MyString
+  status: 1
+  sale_start_date: 2023-09-11
+  sale_end_date: 2023-09-11
+  memo: MyString
+
+two:
+  name: MyString
+  category: MyString
+  stock: 1
+  price: 1
+  description: MyString
+  status: 1
+  sale_start_date: 2023-09-11
+  sale_end_date: 2023-09-11
+  memo: MyString
