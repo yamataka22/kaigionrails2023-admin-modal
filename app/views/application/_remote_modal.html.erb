@@ -1,5 +1,5 @@
 <%= turbo_frame_tag 'remote_modal' do %>
-  <div class="modal modal-blur" data-controller="remote-modal" data-turbo-path="<%= @turbo_path %>">
+  <div class="modal modal-blur" data-controller="remote-modal" data-turbo-path="<%= @turbo_path %>" data-bs-backdrop="<%= backdrop %>">
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
       <div class="modal-content">
         <div class="modal-header">
