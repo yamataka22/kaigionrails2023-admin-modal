@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_turbo_path
-    @turbo_path ||= request.fullpath if turbo_frame_request? && request.get?
+    @turbo_path = request.fullpath if turbo_frame_request?
   end
 end

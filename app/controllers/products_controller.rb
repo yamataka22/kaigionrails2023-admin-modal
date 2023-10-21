@@ -27,33 +27,22 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      _flash = "Product was successfully created."
-      respond_to do |format|
-        format.html { redirect_to product_path(@product), notice: _flash }
-        format.turbo_stream do
-          flash.now[:notice] = _flash
-          @turbo_path = product_path(@product)
-        end
-      end
+      flash.now[:notice] = "更新しました"
+      @turbo_path = product_path(@product)
     else
-      flash.now[:alert] = "Product was unsuccessfully created."
+      flash.now[:alert] = "入力内容をご確認ください"
       render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    @product = Product.find(params[:id])
     if @product.update(product_params)
-      _flash = "Product was successfully updated."
-      respond_to do |format|
-        format.html { redirect_to product_path(@product), notice: _flash }
-        format.turbo_stream do
-          flash.now[:notice] = _flash
-          @turbo_path = product_path(@product)
-        end
-      end
+      flash.now[:notice] = "更新しました"
+      @turbo_path = product_path(@product)
     else
-      flash.now[:alert] = "Product was unsuccessfully updated."
+      flash.now[:alert] = "入力内容をご確認ください"
       render :edit, status: :unprocessable_entity
     end
   end

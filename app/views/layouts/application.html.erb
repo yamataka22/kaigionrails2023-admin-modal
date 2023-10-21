@@ -11,6 +11,13 @@
   </head>
 
   <body class="bg-light">
+  <header>
+    <div class="py-2 text-bg-dark border-bottom">
+      <div class="container-fluid">
+        MyAdmin
+      </div>
+    </div>
+  </header>
   <%= yield %>
   <%= turbo_frame_tag 'remote_modal' %>
   </body>

@@ -1,63 +1,65 @@
-<div class="list-group list-group-flush" id="<%= dom_id(product, :show) %>">
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Name:</strong></div>
-      <div class="col-lg-10"><%= product.name %></div>
+<%= render "remote_modal", title: "商品詳細 ##{product.id}" do %>
+  <div class="list-group list-group-flush" id="<%= dom_id(product, :show) %>">
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Name:</strong></div>
+        <div class="col-lg-10"><%= product.name %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Stock:</strong></div>
-      <div class="col-lg-10"><%= product.stock %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Stock:</strong></div>
+        <div class="col-lg-10"><%= product.stock %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Price:</strong></div>
-      <div class="col-lg-10"><%= product.price %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Price:</strong></div>
+        <div class="col-lg-10"><%= product.price %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Status:</strong></div>
-      <div class="col-lg-10"><%= product.status %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Status:</strong></div>
+        <div class="col-lg-10"><%= product.status %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Description:</strong></div>
-      <div class="col-lg-10"><%= simple_format(h(product.description)) %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Description:</strong></div>
+        <div class="col-lg-10"><%= simple_format(h(product.description)) %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Category:</strong></div>
-      <div class="col-lg-10"><%= product.category %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Category:</strong></div>
+        <div class="col-lg-10"><%= product.category %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Start date:</strong></div>
-      <div class="col-lg-10"><%= product.sale_start_date %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Start date:</strong></div>
+        <div class="col-lg-10"><%= product.sale_start_date %></div>
+      </div>
     </div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="row">
-      <div class="col-lg-2"><strong>Memo:</strong></div>
-      <div class="col-lg-10"><%= simple_format(h(product.memo)) %></div>
+    <div class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-lg-2"><strong>Memo:</strong></div>
+        <div class="col-lg-10"><%= simple_format(h(product.memo)) %></div>
+      </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-between p-3">
-    <div>
-      <% if turbo_frame_request? %>
-        <%= link_to "編集", edit_product_path(@product), class: 'btn btn-info me-2', data: { turbo_frame: 'remote_modal' } %>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">閉じる</button>
-      <% else %>
-        <%= link_to "編集", edit_product_path(@product), class: 'btn btn-info me-2', data: { turbo_frame: '_top' } %>
-        <%= link_to "一覧へ戻る", products_path, class: 'btn btn-outline-secondary', data: { turbo_frame: '_top' } %>
-      <% end %>
-    </div>
+    <div class="d-flex justify-content-between p-3">
+      <div>
+        <% if turbo_frame_request? %>
+          <%= link_to "編集", edit_product_path(product), class: 'btn btn-info me-2', data: { turbo_frame: 'remote_modal' } %>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">閉じる</button>
+        <% else %>
+          <%= link_to "編集", edit_product_path(product), class: 'btn btn-info me-2', data: { turbo_frame: '_top' } %>
+          <%= link_to "一覧へ戻る", products_path, class: 'btn btn-outline-secondary', data: { turbo_frame: '_top' } %>
+        <% end %>
+      </div>
 
-    <%= link_to "削除", @product, class: 'btn btn-warning', data: { turbo_method: :delete, turbo_confirm: '削除してよろしいでしょうか？' } %>
+      <%= link_to "削除", product, class: 'btn btn-warning', data: { turbo_method: :delete, turbo_confirm: '削除してよろしいでしょうか？' } %>
+    </div>
   </div>
-</div>
+<% end %>
