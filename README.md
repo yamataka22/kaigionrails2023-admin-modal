@@ -1,24 +1,14 @@
-# README
+# Kaigi on Rails2023 Admin Modal Sample
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Kaigi on Rails2023 Day2「Hotwireを使って管理画面を簡単にプチSPA化する」で使用したサンプルコードです。
 
-Things you may want to cover:
+## セットアップ
 
-* Ruby version
+```bash
+docker volume create kaigionrails2023-admin-modal-bundle-cache
+docker run --rm -it -v ${PWD}:/rails -v kaigionrails2023-admin-modal-bundle-cache:/bundle ghcr.io/rails/cli bin/setup
+docker run --rm -it -v ${PWD}:/rails -v kaigionrails2023-admin-modal-bundle-cache:/bundle -p 3000:3000 ghcr.io/rails/cli bin/dev
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+MIT License.
