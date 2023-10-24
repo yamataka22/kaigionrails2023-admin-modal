@@ -1,4 +1,5 @@
 <% if @product.errors.blank? %>
   <%= turbo_stream.update 'remote_modal' %>
   <%= turbo_stream.remove @product %>
+  <%= render_turbo_stream_flash_messages %>
 <% end %>

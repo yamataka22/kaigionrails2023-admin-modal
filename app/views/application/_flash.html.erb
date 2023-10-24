@@ -1,0 +1,12 @@
+<div class="flash" data-controller="flash">
+  <% flash.each do |flash_type, message| %>
+    <%
+      flash_type = 'info' if flash_type == 'notice'
+      flash_type = 'danger' if flash_type == 'alert'
+    %>
+    <div class="alert alert-dismissible rounded-0 text-center alert-<%= flash_type %>">
+      <%= message %>
+      <a href="#" class="btn-close" aria-label="close" data-bs-dismiss="alert"></a>
+    </div>
+  <% end %>
+</div>

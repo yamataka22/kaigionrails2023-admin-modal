@@ -8,3 +8,18 @@
         color: $danger;
     }
 }
+
+.flash {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    .alert {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .alert-dismissible .btn-close {
+        padding-top: 4px;
+    }
+}

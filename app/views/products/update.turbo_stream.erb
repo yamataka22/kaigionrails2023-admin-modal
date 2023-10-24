@@ -1,2 +1,3 @@
 <%= turbo_stream.replace 'remote_modal', @product %>
 <%= turbo_stream.replace @product, partial: 'product_row', locals: { product: @product } %>
+<%= render_turbo_stream_flash_messages %>
